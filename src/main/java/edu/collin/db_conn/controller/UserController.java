@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@CrossOrigin(origins = "*") // Allow requests from all locations
 @RequestMapping("/users")
 public class UserController {
 
@@ -30,7 +29,7 @@ public class UserController {
 
     @Autowired
     private JwtUtil jwtUtil;
-
+    @CrossOrigin(origins = "*") // Allow requests from all locations
     @PostMapping("/login")
     public Map<String, String> login(@RequestBody Map<String, String> request) {
 
@@ -44,12 +43,12 @@ public class UserController {
         String token = jwtUtil.generateToken(request.get("email"));
         return Map.of("token", token);
     }
-
+    @CrossOrigin(origins = "*") // Allow requests from all locations
     @GetMapping("/get")
     public List<User> getAll() {
         return repository.findAll();
     }
-
+    @CrossOrigin(origins = "*") // Allow requests from all locations
     @GetMapping("/confirm")
     public boolean confirm(String name, String email, Long id) {
         if (id > 0) {
@@ -59,6 +58,7 @@ public class UserController {
         }
     }
 
+    @CrossOrigin(origins = "*") // Allow requests from all locations
     @PostMapping("/register")
     public User create(@RequestBody User user) {
         User result;

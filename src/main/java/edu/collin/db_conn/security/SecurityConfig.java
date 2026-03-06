@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 @Configuration
 @EnableWebSecurity
@@ -19,6 +20,7 @@ public class SecurityConfig {
     @Autowired
     private JwtFilter jwtFilter;
 
+    @CrossOrigin(origins = "*") // Allow requests from all locations
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
@@ -36,6 +38,7 @@ public class SecurityConfig {
         return http.build();
     }
 
+    @CrossOrigin(origins = "*") // Allow requests from all locations
     @Bean
     public AuthenticationManager authenticationManager(
             AuthenticationConfiguration config) throws Exception {
