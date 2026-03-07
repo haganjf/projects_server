@@ -12,7 +12,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.bind.annotation.CrossOrigin;
-@CrossOrigin(origins = "https://registration-login-page-xc1q.onrender.com")
+@CrossOrigin(origins= "https://registration-login-page-xc1q.onrender.com", allowCredentials = "true" )
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
