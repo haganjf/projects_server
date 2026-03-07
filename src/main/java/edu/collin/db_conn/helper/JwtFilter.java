@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
-@CrossOrigin
+@CrossOrigin(origins = "https://registration-login-page-xc1q.onrender.com")
 @Component
 public class JwtFilter extends OncePerRequestFilter {
 
