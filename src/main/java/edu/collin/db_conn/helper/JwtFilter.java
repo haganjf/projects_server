@@ -34,6 +34,7 @@ public class JwtFilter extends OncePerRequestFilter {
         String path = request.getServletPath();
 
         if (path.equals("/users/login")) {
+            System.out.println("No authorization on login!");
             chain.doFilter(request, response);
             return;
         }
