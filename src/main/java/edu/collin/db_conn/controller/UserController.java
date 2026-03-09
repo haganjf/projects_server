@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Map;
 
-@CrossOrigin(origins= "https://registration-login-page-xc1q.onrender.com", allowCredentials = "true" )
+@CrossOrigin(origins= "*", allowCredentials = "true" )
 @RestController
 @RequestMapping("/users")
 public class UserController {
