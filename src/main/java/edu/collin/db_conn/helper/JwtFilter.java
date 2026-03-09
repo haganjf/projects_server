@@ -44,10 +44,11 @@ public class JwtFilter extends OncePerRequestFilter {
 
             String token = header.substring(7);
             String username = jwtUtil.extractUsername(token);
-
+            System.out.println("Username: "+username);
+            
             UserDetails userDetails =
                     userDetailsService.loadUserByUsername(username);
-            System.out.println("Username: "+username);
+
 
             UsernamePasswordAuthenticationToken auth =
                     new UsernamePasswordAuthenticationToken(
