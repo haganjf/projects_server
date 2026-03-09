@@ -55,7 +55,7 @@ public class SecurityConfig {
 
         // 2. Allow the Authorization header to be SENT by the client
         // Use List.of("Authorization", "Content-Type") for stricter control
-        configuration.setAllowedHeaders(List.of("Authorization", "Cache-Control", "Content-Type"));
+        configuration.setAllowedHeaders(List.of("*"));
 
         // 3. Expose the Authorization header so the client can READ it (e.g., for refreshed tokens)
         configuration.setExposedHeaders(List.of("Authorization"));
