@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Map;
 
-@CrossOrigin(originPatterns = "*", allowCredentials = "true" )
 @RestController
 @RequestMapping("/users")
 public class UserController {
