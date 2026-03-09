@@ -33,14 +33,14 @@ public class UserController {
 
     @PostMapping("/login")
     public Map<String, String> login(@RequestBody Map<String, String> request) {
-/*
+
         authManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         request.get("email"),
                         request.get("password")
                 )
         );
-*/
+
         String token = jwtUtil.generateToken(request.get("email"));
         return Map.of("token", token);
     }
