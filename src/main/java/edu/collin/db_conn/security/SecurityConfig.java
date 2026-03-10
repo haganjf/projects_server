@@ -51,7 +51,7 @@ public class SecurityConfig {
         CorsConfiguration configuration = new CorsConfiguration();
 
         // 1. Subdomain Wildcards
-        configuration.setAllowedOriginPatterns(List.of("https://*.onrender.com"));
+        configuration.setAllowedOriginPatterns(List.of("https://registration-login-page-xc1q.onrender.com"));
 
         // 2. Allow the Authorization header to be SENT by the client
         // Use List.of("Authorization", "Content-Type") for stricter control
