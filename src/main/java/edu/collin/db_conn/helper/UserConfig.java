@@ -12,6 +12,7 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 @Configuration
 public class UserConfig {
 
+    /*******
     @Bean
     public UserDetailsService userDetailsService() {
         UserDetails user = User
@@ -27,4 +28,6 @@ public class UserConfig {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
+     */
 }

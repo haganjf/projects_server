@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:postgresql://dpg-d5pr2gi4d50c73adtl2g-a.oregon-postgres.render.com:5432/sample?sslmode=require
+    url: jdbc:postgresql://dpg-d5pr2gi4d50c73adtl2g-a:5432/sample?sslmode=require
     username: collin
     password: R3RWJQ5m15ctXBD0NAG5aXjQfGnqZ8zc
     driver-class-name: org.postgresql.Driver
@@ -31,3 +31,8 @@ spring:
 
   server:
     port: ${PORT:8080}
+  logging:
+    level:
+      org:
+        springframework:
+          security: DEBUG

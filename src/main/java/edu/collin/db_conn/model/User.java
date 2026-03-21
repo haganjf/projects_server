@@ -3,6 +3,8 @@ package edu.collin.db_conn.model;
 import edu.collin.db_conn.helper.EmailValidator;
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "users")
 public class User {
@@ -76,6 +78,19 @@ public class User {
             this.errorCode = "Name and password must both be populated.";
             return false;
         }
+    }
+
+    public boolean isRegistered(List<User> users) {
+        for (User user : users) {
+            if (user.getEmail().equals(this.email)) { // check password
+                if (user.getPassword().equals(this.password)) { // user is registered
+                    return true;
+                } else { // password does not match
+                    return false;
+                }
+            } // end if email matches
+        }
+        return false; // there was no match
     }
     public void setErrorCode(String errorCode) {
         this.errorCode = errorCode;

@@ -6,6 +6,8 @@ import edu.collin.db_conn.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,34 +16,52 @@ import java.util.Map;
 @RestController
 @RequestMapping("/users")
 public class UserController {
+    private AuthenticationManager authManager;
+    private JwtUtil jwtUtil;
+    private UserDetailsService userDetailsService;
 
+    public UserController(AuthenticationManager authManager,
+                          JwtUtil jwtUtil,
+                          UserDetailsService userDetailsService) {
+        this.authManager = authManager;
+        this.jwtUtil = jwtUtil;
+        this.userDetailsService = userDetailsService;
+    }
     @Autowired
     private EmailService emailService;
 
-    private final UserRepository repository;
+    private UserRepository repository;
 
     public UserController(UserRepository repository) {
         this.repository = repository;
     }
 
-    @Autowired
-    private AuthenticationManager authManager;
+//    @Autowired
+//   private AuthenticationManager authManager;
 
-    @Autowired
-    private JwtUtil jwtUtil;
+  //  @Autowired
+  //  private JwtUtil jwtUtil;
 
     @PostMapping("/login")
     public Map<String, String> login(@RequestBody Map<String, String> request) {
-
-        authManager.authenticate(
-                new UsernamePasswordAuthenticationToken(
-                        request.get("email"),
-                        request.get("password")
-                )
-        );
-
-        String token = jwtUtil.generateToken(request.get("email"));
-        return Map.of("token", token);
+        User user = new User();
+        user.setEmail(request.get("email"));
+        user.setPassword(request.get("password"));
+        List<User> users = repository.findAll();
+        if (user.isRegistered(users)) {
+            authManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(
+                            user.getEmail(),
+                            user.getPassword()
+                    )
+            );
+            UserDetails userDetails =
+                    userDetailsService.loadUserByUsername(user.getEmail());
+            String token = jwtUtil.generateToken(user.getEmail());
+            return Map.of("token", token);
+        } else {
+            return Map.of("Error", "Login invalid");
+        }
     }
 
     @GetMapping("/get")
