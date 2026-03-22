@@ -16,31 +16,24 @@ import java.util.Map;
 @RestController
 @RequestMapping("/users")
 public class UserController {
-    private AuthenticationManager authManager;
-    private JwtUtil jwtUtil;
-    private UserDetailsService userDetailsService;
 
-    public UserController(AuthenticationManager authManager,
-                          JwtUtil jwtUtil,
-                          UserDetailsService userDetailsService) {
-        this.authManager = authManager;
-        this.jwtUtil = jwtUtil;
-        this.userDetailsService = userDetailsService;
-    }
     @Autowired
     private EmailService emailService;
+    private final UserRepository repository;
 
-    private UserRepository repository;
-
+    @Autowired
     public UserController(UserRepository repository) {
         this.repository = repository;
     }
 
-//    @Autowired
-//   private AuthenticationManager authManager;
+    @Autowired
+    private AuthenticationManager authManager;
 
-  //  @Autowired
-  //  private JwtUtil jwtUtil;
+    @Autowired
+    private JwtUtil jwtUtil;
+
+    @Autowired
+    private UserDetailsService userDetailsService;
 
     @PostMapping("/login")
     public Map<String, String> login(@RequestBody Map<String, String> request) {
