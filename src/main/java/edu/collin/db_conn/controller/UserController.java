@@ -1,13 +1,17 @@
 package edu.collin.db_conn.controller;
 
+import edu.collin.db_conn.helper.CustomUserDetailsService;
 import edu.collin.db_conn.helper.JwtUtil;
 import edu.collin.db_conn.model.User;
 import edu.collin.db_conn.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -33,28 +37,25 @@ public class UserController {
     private JwtUtil jwtUtil;
 
     @Autowired
-    private UserDetailsService userDetailsService;
+    private CustomUserDetailsService userDetailsService;
 
     @PostMapping("/login")
     public Map<String, String> login(@RequestBody Map<String, String> request) {
         User user = new User();
         user.setEmail(request.get("email"));
         user.setPassword(request.get("password"));
-        List<User> users = repository.findAll();
-        if (user.isRegistered(users)) {
-            authManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(
-                            user.getEmail(),
-                            user.getPassword()
-                    )
-            );
-            UserDetails userDetails =
-                    userDetailsService.loadUserByUsername(user.getEmail());
-            String token = jwtUtil.generateToken(user.getEmail());
-            return Map.of("token", token);
-        } else {
-            return Map.of("Error", "Login invalid");
-        }
+        try {
+         authManager.authenticate(
+          new UsernamePasswordAuthenticationToken(
+           user.getEmail(),
+           user.getPassword()
+          )
+         );
+         String token = jwtUtil.generateToken(user.getEmail());
+         return Map.of("token", token);
+        } catch (Exception x) {
+        return Map.of("Error", x.toString());
+       }
     }
 
     @GetMapping("/get")
@@ -77,8 +78,7 @@ public class UserController {
               try {
                // emailService.sendEmail(result.getEmail(), result.getName(), result.getId());
                 if (user.isValidUser()) {
-                 result = repository.save(user);
-                 return result;
+                 return  userDetailsService.register(user);
                 } else {
                     return user;
                 }
