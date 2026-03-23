@@ -44,7 +44,7 @@ public class UserController {
         User user = new User();
         user.setEmail(request.get("email"));
         user.setPassword(request.get("password"));
-        try {
+  //      try {
          authManager.authenticate(
           new UsernamePasswordAuthenticationToken(
            user.getEmail(),
@@ -53,9 +53,9 @@ public class UserController {
          );
          String token = jwtUtil.generateToken(user.getEmail());
          return Map.of("token", token);
-        } catch (Exception x) {
-        return Map.of("Error", x.toString());
-       }
+  //      } catch (Exception x) {
+  //      return Map.of("Error", x.toString());
+  //     }
     }
 
     @GetMapping("/get")
