@@ -5,8 +5,8 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "items")
-public class Item {
+@Table(name = "categories")
+public class Category {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -14,18 +14,15 @@ public class Item {
 
     private String name;
 
-    @ManyToOne
-    @JoinColumn(name = "category_id") // foreign key column
-    private Category category;
+    @OneToMany(mappedBy = "id")
+    private List<Category> categories;
 
-    public Item() {}
-
-    public Item(String name) {
-        this.name = name;
+    public List<Category> getCategories() {
+        return categories;
     }
 
-    public Long getId() {
-        return id;
+    public void setCategories(List<Category> categories) {
+        this.categories = categories;
     }
 
     public String getName() {
@@ -35,4 +32,6 @@ public class Item {
     public void setName(String name) {
         this.name = name;
     }
+
 }
+
