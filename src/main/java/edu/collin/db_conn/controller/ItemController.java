@@ -23,7 +23,7 @@ public class ItemController {
         return repository.findAll();
     }
 
-    @PostMapping
+    @PostMapping("/create")
     public Item create(@RequestBody Item item) {
         return repository.save(item);
     }

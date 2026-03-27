@@ -3,6 +3,7 @@ package edu.collin.db_conn.model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -19,6 +20,14 @@ public class Item {
     @ManyToOne
     @JoinColumn(name = "category_id") // foreign key column
     private Category category;
+
+    private String description;
+
+    private double min_price;
+
+    private Date start_date;
+
+    private Date end_date;
 
     public Item() {}
 
