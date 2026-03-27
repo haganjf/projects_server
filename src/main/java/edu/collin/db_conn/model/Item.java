@@ -1,5 +1,6 @@
 package edu.collin.db_conn.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -14,6 +15,7 @@ public class Item {
 
     private String name;
 
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "category_id") // foreign key column
     private Category category;
