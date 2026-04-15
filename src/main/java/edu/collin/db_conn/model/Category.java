@@ -14,7 +14,7 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @JsonManagedReference
-    @OneToMany(mappedBy = "category")
+    @OneToMany(mappedBy = "category_id")
     private List<Item> items;
 
     private String name;
