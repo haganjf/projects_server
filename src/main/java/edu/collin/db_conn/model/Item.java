@@ -19,7 +19,14 @@ public class Item {
     @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "category_id") // foreign key column
-    private Category category;
+
+    public int getCategory_id() {
+        return category_id;
+    }
+    public void setCategory_id(int category_id) {
+        this.category_id = category_id;
+    }
+    private int category_id;
 
     public String getDescription() {
         return description;
