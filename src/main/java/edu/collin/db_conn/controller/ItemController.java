@@ -18,7 +18,7 @@ public class ItemController {
         this.repository = repository;
     }
 
-    @GetMapping
+    @GetMapping("/getAll")
     public List<Item> getAll() {
         return repository.findAll();
     }
