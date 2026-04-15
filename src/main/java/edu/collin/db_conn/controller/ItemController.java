@@ -26,7 +26,7 @@ public class ItemController {
     @PostMapping("/create")
     public Item create(@RequestBody Item item) {
         System.out.println("Name: "+item.getName());
-        System.out.println("Category: "+item.getCategory());
+        System.out.println("Category: "+item.getCategory_id());
         System.out.println("Description: "+item.getDescription());
         System.out.println("Min price: "+item.getMin_price());
         System.out.println("Start Date: "+item.getStart_date());
