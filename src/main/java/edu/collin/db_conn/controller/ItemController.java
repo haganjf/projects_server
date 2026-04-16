@@ -2,6 +2,7 @@ package edu.collin.db_conn.controller;
 
 import edu.collin.db_conn.model.Item;
 import edu.collin.db_conn.repository.ItemRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,7 +21,7 @@ public class ItemController {
 
     @GetMapping("/getAll")
     public List<Item> getAll() {
-        return repository.findAll();
+        return repository.findAllItems();
     }
 
     @PostMapping("/create")
