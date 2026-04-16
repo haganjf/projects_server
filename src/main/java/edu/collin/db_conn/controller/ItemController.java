@@ -20,7 +20,7 @@ public class ItemController {
     }
 
     @GetMapping("/getAll")
-    public List<Item> getAll() {
+    public List<Object> getAll() {
         return repository.findAllItems();
     }
 
