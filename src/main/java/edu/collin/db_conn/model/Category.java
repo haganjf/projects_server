@@ -14,18 +14,13 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @JsonManagedReference
-    @OneToMany(mappedBy = "category_id")
-    private List<Item> items;
+    @OneToMany(mappedBy = "id")
+
+    public Long getId() {return id;}
+
+    public void setId(Long id) {this.id = id;}
 
     private String name;
-
-    public List<Item> getItems() {
-        return items;
-    }
-
-    public void setItems(List<Item> items) {
-        this.items = items;
-    }
 
     public String getName() {
         return name;
