@@ -7,6 +7,6 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface ItemRepository extends JpaRepository<Item, Long> {
-    @Query("select o.name,c.name as category,o.min_price, o.start_date, o.end_date from Item o JOIN Category  c on o.category_id = c.id")
+    @Query("select o.name,c.name as category,o.min_price, o.max_bid, o.start_date, o.end_date from Item o JOIN Category  c on o.category_id = c.id")
     List<Object> findAllItems();
 }
