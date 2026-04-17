@@ -48,6 +48,16 @@ public class Item {
 
     private double min_price;
 
+    public double getMax_bid() {
+        return max_bid;
+    }
+
+    public void setMax_bid(double max_bid) {
+        this.max_bid = max_bid;
+    }
+
+    private double max_bid;
+
     public void setId(Long id) {
         this.id = id;
     }
